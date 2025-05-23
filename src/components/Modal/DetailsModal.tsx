@@ -27,7 +27,10 @@ const DetailsModal = ({ isOpen, onOpenChange }: DetailsModalProps) => {
 
 	const theme = darkmode ? "#DEDEDE" : "#c1c5ca"
 	const fontColor = darkmode ? "#121212" : "#FFFFFF"
-
+	if (!selectedEvent?.date) {
+		console.error("selectedEvent.date is null");
+		return;
+	}
 	const start = parseISO(selectedEvent.date);
 	const end = new Date(start.getTime() + selectedEvent.timeRange * 60000);
 	const handleRemove = () => {
