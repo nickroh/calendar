@@ -10,9 +10,36 @@ const EasterButton: React.FC<ButtonProps> = (props) => {
 
 	const handleConfetti = (e: PressEvent) => {
 		confetti({
-			particleCount: 100,
-			spread: 70,
-			origin: { x: 0.1, y: 0.85 },
+			particleCount: 200,
+			spread: 100,
+			origin: { x: 0, y: 1 },
+			angle: 50,
+			shapes: ['circle', 'circle', 'star','square'],
+			scalar: 0.9,
+		});
+		confetti({
+			particleCount: 200,
+			spread: 100,
+			origin: { x: 0, y: 0 },
+			angle: 310,
+			shapes: ['circle', 'circle', 'star','square'],
+			scalar: 0.9,
+		});
+		confetti({
+			particleCount: 200,
+			spread: 100,
+			origin: { x: 1, y: 1 },
+			angle: 140,
+			shapes: ['circle', 'circle', 'star','square'],
+			scalar: 0.9,
+		});
+		confetti({
+			particleCount: 200,
+			spread: 100,
+			origin: { x: 1, y: 0 },
+			angle: 230,
+			shapes: ['circle', 'circle', 'star','square'],
+			scalar: 0.9,
 		});
 		props.onPress?.(e);
 	};
