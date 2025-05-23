@@ -3,10 +3,9 @@ import {
 	Dropdown,
 	DropdownTrigger,
 	DropdownMenu,
-	DropdownSection,
 	DropdownItem
 } from "@heroui/dropdown";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { languageLabels } from "../../utils/util";
 import { AppDispatch, RootState } from "../../store/store";
 import { useDispatch, useSelector } from "react-redux";

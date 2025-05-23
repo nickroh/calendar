@@ -55,7 +55,6 @@ export const languageLabels: Record<Lang, string> = {
 
 export function toISOStringWithTime(date: string, time: Time): string {
     const [year, month, day] = date.split("-").map(Number);
-    //console.log(new Date(year, month - 1, day, time.hour, time.minute, 0, 0).getDate())
     return new Date(year, month - 1, day, time.hour, time.minute, 0, 0).toISOString();
 }
 
@@ -86,21 +85,11 @@ export const filterEvents = (isoString: string) => createSelector(
         sunday.setDate(date.getDate() - day);
 
         const saturday = new Date(sunday);
-        saturday.setDate(saturday.getDate() + 6);  // ← 여기 주의!
+        saturday.setDate(saturday.getDate() + 6);
         saturday.setHours(23, 59, 59, 999);
 
-        // console.log("Week range:");
-        // console.log("Sunday start:", sunday.toString());
-        // console.log("Saturday end:", saturday.toString());
         return events.filter(event => {
-            // event.date는 ISO UTC 문자열이라 가정
-            const eventDate = new Date(event.date); // Date 객체는 자동으로 로컬 시간 기준으로 변환됨
-            // console.log(
-            //     "Event:", event.date,
-            //     "\n-> Local time:", eventDate.toString(),
-            //     "\nIs in range:",
-            //     eventDate >= sunday && eventDate <= saturday
-            //   );
+            const eventDate = new Date(event.date); 
             return eventDate >= sunday && eventDate <= saturday;
         });
     }
@@ -112,18 +101,9 @@ export const filterEventsperMonth = (start: string, end:string) => createSelecto
         const begin = parseISO(start).getDay()
         const last = parseISO(end).getDay()
 
-        // console.log("Week range:");
-        // console.log("Sunday start:", sunday.toString());
-        // console.log("Saturday end:", saturday.toString());
         return events.filter(event => {
-            // event.date는 ISO UTC 문자열이라 가정
-            const eventDate = parseISO(event.date).getDay(); // Date 객체는 자동으로 로컬 시간 기준으로 변환됨
-            // console.log(
-            //     "Event:", event.date,
-            //     "\n-> Local time:", eventDate.toString(),
-            //     "\nIs in range:",
-            //     eventDate >= sunday && eventDate <= saturday
-            //   );
+            const eventDate = parseISO(event.date).getDay();
+
             return eventDate >= begin && eventDate <= last;
         });
     }

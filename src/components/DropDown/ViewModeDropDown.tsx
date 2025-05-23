@@ -7,12 +7,10 @@ import {
     DropdownItem
 } from "@heroui/dropdown";
 import { useMemo, useState } from "react";
-import { languageLabels } from "../../utils/util";
 import { AppDispatch, RootState } from "../../store/store";
 import { useDispatch, useSelector } from "react-redux";
 import { setSelectedLang, setViewMode } from "../../store/option/optionSlice";
 import { ViewModeOption } from "../../utils/constants";
-import { ViewMode } from "../../store/option/option";
 
 const ViewDropDown = () => {
     const lang = useSelector((state: RootState) => state.option.lang);

@@ -1,5 +1,3 @@
-import { Event } from "../../store/event/event";
-
 export interface CreateModalProps {
     isOpen: boolean;
     onOpenChange?: () => void;
