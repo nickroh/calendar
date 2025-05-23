@@ -68,9 +68,9 @@ export function getEventBox(dayIndex: number, startHour: number, startMinute: nu
 
     return {
         left: `${labelRatio + columnRatio * (dayIndex) + shift}%`,
-        top: `${rowHeight * startHour}rem`,
+        top: `${rowHeight * (startHour + (startMinute / 60))}rem`,
         width: `${columnSize}%`,
-        height: `${(rowHeight * durationMinutes) / 60}rem`
+        height: `${(rowHeight * durationMinutes / 60)}rem`
     };
 }
 
