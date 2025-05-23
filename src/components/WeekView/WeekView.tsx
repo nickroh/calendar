@@ -122,8 +122,8 @@ const WeekView = () => {
 				</div>
 
 				{boxes.map((box, index) => (
-					<div onClick={() => toggleModal(box.id)}>
-						<TimeBox key={index} {...box} />
+					<div key={index} onClick={() => toggleModal(box.id)}>
+						<TimeBox {...box} />
 					</div>
 
 				))}

@@ -27,16 +27,10 @@ const SideMenu = () => {
 		>
 			<div className="p-4 flex flex-col items-center gap-4">
 				<MiniCalendar />
-				<EasterButton />
-				<EasterButton />
-				<EasterButton />
-				<EasterButton />
-				<EasterButton />
-				<EasterButton />
-				<EasterButton />
-				<EasterButton />
-				<EasterButton />
-				<EasterButton />
+				{[...Array(7)].map((_,idx)=> (
+					<EasterButton key={idx}/>
+				))}
+
 				<div className="h-16"/>
 			</div>
 		</div>

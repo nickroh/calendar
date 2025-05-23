@@ -13,6 +13,7 @@ export default function MiniCalendar() {
 	return (
 		<div>
 			<Calendar
+				showMonthAndYearPickers
 				className={darkmode ? 'dark' : 'light'}
 				color="danger" calendarWidth={250}
 				aria-label="Date (Uncontrolled)"

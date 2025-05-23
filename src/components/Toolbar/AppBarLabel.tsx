@@ -11,6 +11,8 @@ import { setExpandedMode, setSelectedDate } from "../../store/option/optionSlice
 import DarkModeSwitch from "../Switches/Switches.tsx";
 import { parseDateOnly, addDaysToISODate } from "../../utils/util.ts";
 import LangDropDown from "../DropDown/LangDropDown.tsx";
+import { ViewMode } from "../../store/option/option.ts";
+import ViewModeDropDown from "../DropDown/ViewModeDropDown.tsx";
 
 interface Props {
   label: string;
@@ -19,16 +21,20 @@ interface Props {
 const AppBarLabel: React.FC<Props> = ({ label }) => {
   const dispatch = useDispatch<AppDispatch>();
 	const date = useSelector((state: RootState) => state.option.selectedDate);
+  const mode = useSelector((state: RootState) => state.option.viewMode);
   const handleExpandedMode = () => {
     dispatch(setExpandedMode());
   };
 
   const incrementDate = () => {
-    dispatch(setSelectedDate(addDaysToISODate(date,1)))
+    console.log(mode)
+    const jump = mode === ViewMode.week ? 7: 30; 
+    dispatch(setSelectedDate(addDaysToISODate(date,jump)))
   }
 
   const decrementDate = () => {
-    dispatch(setSelectedDate(addDaysToISODate(date,-1)))
+    const jump = mode === ViewMode.week ? 7: 30; 
+    dispatch(setSelectedDate(addDaysToISODate(date,-jump)))
   }
 
   return (
@@ -66,6 +72,8 @@ const AppBarLabel: React.FC<Props> = ({ label }) => {
       <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
         { parseDateOnly(date)}
       </Typography>
+      <ViewModeDropDown/>
+      <div className="p-2" />
       <LangDropDown/>
       <div className="p-2" />
       <DarkModeSwitch/>

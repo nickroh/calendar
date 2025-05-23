@@ -5,6 +5,7 @@ import { EventsState, Event } from "../store/event/event";
 import { RootState } from "../store/store";
 import { HtmlColors } from "./constants";
 import { Coord } from "../components/TimeBox/box.types";
+import { startOfWeek, addDays, parseISO } from 'date-fns';
 
 export function parseDateOnly(isoString: string) {
     return isoString.split("T")[0]; // "2025-05-21"
@@ -59,16 +60,16 @@ export function toISOStringWithTime(date: string, time: Time): string {
 }
 
 export function getEventBox(dayIndex: number, startHour: number, startMinute: number, durationMinutes: number, small: boolean): Coord {
-    const scale = small ? 0.60: 1;
-    const columnSize = 1 / 7.3 * 100 * scale; 
-    const labelRatio = 3/73 * 100;       // ≈ 4.11%
+    const scale = small ? 0.60 : 1;
+    const columnSize = 1 / 7.3 * 100 * scale;
+    const labelRatio = 3 / 73 * 100;       // ≈ 4.11%
     const columnRatio = 1 / 7.3 * 100;        // ≈ 13.70%
     const rowHeight = 8.2;             // ≈ 4.16%
-    const shift = small ?  Math.random() * 0.4 * columnRatio : 0
+    const shift = small ? Math.random() * 0.4 * columnRatio : 0
 
     return {
         left: `${labelRatio + columnRatio * (dayIndex) + shift}%`,
-        top: `${ rowHeight * startHour}%`,
+        top: `${rowHeight * startHour}%`,
         width: `${columnSize}%`,
         height: `${(rowHeight * durationMinutes) / 60}%`
     };
@@ -83,7 +84,7 @@ export const filterEvents = (isoString: string) => createSelector(
         const sunday = new Date(date);
         sunday.setHours(0, 0, 0, 0);
         sunday.setDate(date.getDate() - day);
-    
+
         const saturday = new Date(sunday);
         saturday.setDate(saturday.getDate() + 6);  // ← 여기 주의!
         saturday.setHours(23, 59, 59, 999);
@@ -105,6 +106,28 @@ export const filterEvents = (isoString: string) => createSelector(
     }
 );
 
+export const filterEventsperMonth = (start: string, end:string) => createSelector(
+    (state: RootState) => state.event.events,
+    (events: Event[]) => {
+        const begin = parseISO(start).getDay()
+        const last = parseISO(end).getDay()
+
+        // console.log("Week range:");
+        // console.log("Sunday start:", sunday.toString());
+        // console.log("Saturday end:", saturday.toString());
+        return events.filter(event => {
+            // event.date는 ISO UTC 문자열이라 가정
+            const eventDate = parseISO(event.date).getDay(); // Date 객체는 자동으로 로컬 시간 기준으로 변환됨
+            // console.log(
+            //     "Event:", event.date,
+            //     "\n-> Local time:", eventDate.toString(),
+            //     "\nIs in range:",
+            //     eventDate >= sunday && eventDate <= saturday
+            //   );
+            return eventDate >= begin && eventDate <= last;
+        });
+    }
+);
 
 export function randomColor(): string {
     const values = Object.values(HtmlColors);
@@ -118,5 +141,21 @@ export function calendarDateToDate(calDate: CalendarDate): Date {
 
 
 export function calendarDateToLocalDate(val: CalendarDate): Date {
-	return new Date(val.year, val.month - 1, val.day, 0, 0, 0, 0);
+    return new Date(val.year, val.month - 1, val.day, 0, 0, 0, 0);
+}
+
+export function getCalendarDates(isoString: string) {
+    const firstOfMonth = parseISO(isoString);
+    const start = startOfWeek(new Date(firstOfMonth.getFullYear(), firstOfMonth.getMonth(), 1), {
+      weekStartsOn: 0, // Sunday
+    });
+  
+    const flatDates = Array.from({ length: 35 }, (_, i) => addDays(start, i).toISOString());
+
+    const calendarMatrix = [];
+    for (let i = 0; i < 5; i++) {
+      calendarMatrix.push(flatDates.slice(i * 7, i * 7 + 7));
+    }
+  
+    return calendarMatrix;
 }
