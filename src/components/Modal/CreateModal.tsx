@@ -36,15 +36,13 @@ const CreateModal = ({ isOpen, onOpenChange }: CreateModalProps) => {
 	const dispatch = useDispatch<AppDispatch>();
 
 	const theme = darkmode ? "#DEDEDE" : "#c1c5ca"
-	const fontColor = darkmode ? "#121212" : "#FFFFFF"
+	const fontColor = darkmode ? "#121212" : "#121212"
 
 	const [description, setdescription] = useState("");
 	const [date, setDate] = useState(parseDate(parseDateOnly(curr)));
 	const [start, setStart] = useState(new Time());
 	const [end, setend] = useState(new Time());
 	const [title, setTitle] = useState("");
-
-	// console.log(date.year, date.month , date.day)
 
 	const [complete, setComplete] = useState(false);
 

@@ -22,6 +22,7 @@ const MonthView = () => {
 
 	const themeCode = darkmode ? "#161616" : "#f9f9f7"
 	const fontColor = darkmode ? "#DCDCDC" : "#161616"
+	const detailColor = darkmode ? "#FF7F50" : "#161616"
 	const [matrix, setMatrix] = useState<monthElement[][]>([]);
 	const days = useMemo(() => getCalendarDates(date), [date]);
 	const events = useSelector(filterEventsperMonth(days[0][0], days[4][6]))
@@ -105,10 +106,15 @@ const MonthView = () => {
 						className="grid grid-cols-[1fr_1fr_1fr_1fr_1fr_1fr_1fr] h-28"
 					>
 						{Array.from({ length: 7 }).map((_, j) => (
-							<div key={j} className="border border-b border-gray-600 p-2">
+							<div key={j}
+								className="border border-b border-gray-600 p-2 overflow-scroll"
+								style={{
+									scrollbarWidth: 'none',
+									msOverflowStyle: 'none',
+								}}>
 								{matrix[i]?.[j]?.day ?? 0}
 								{matrix[i]?.[j]?.events?.map((event, idx) => (
-									<div onClick={() => (toggleModal(event.id))} key={idx} className="text-sm text-blue-400">
+									<div onClick={() => (toggleModal(event.id))} key={idx} className="text-sm text-blue-400" style={{color: detailColor}}>
 										{event.name}
 									</div>
 								))}

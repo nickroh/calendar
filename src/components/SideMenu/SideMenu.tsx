@@ -32,6 +32,7 @@ const SideMenu = () => {
 				))}
 
 				<div className="h-16"/>
+				<div className="h-16"/>
 			</div>
 		</div>
 	)
