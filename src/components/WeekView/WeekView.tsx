@@ -122,18 +122,7 @@ const WeekView = () => {
 						</div>
 					))}
 				</div>
-				<div
-					className="absolute opacity-60 rounded"
-					style={{
-						left: "4%", // 14:00
-						top: "0%",   // e.g., Thursday (4th row)
-						width: "4%",  // 2 hours
-						height: "4rem", // one day row
-						backgroundColor: "#FEFEFE",
-						color: "#FEFEFE"
-					}}
-				// onClick={}
-				/>
+
 				{boxes.map((box, index) => (
 					<div key={index} onClick={() => toggleModal(box.id)}>
 						<TimeBox {...box} />
