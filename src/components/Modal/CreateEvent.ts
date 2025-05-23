@@ -20,7 +20,6 @@ const createEvent = (
 		timeRange: timeRange,
 		color: randomColor()
 	}
-	console.log("===============",date)
 
 	dispatch(addEvent(newEvent))
 }
