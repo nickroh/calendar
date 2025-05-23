@@ -51,10 +51,12 @@ const WeekView = () => {
 			end = eventEnd
 			const color = event.color
 			const id = event.id
+			const title = event.name
 			return {
 				coord,
 				color,
 				id,
+				title
 			};
 		});
 

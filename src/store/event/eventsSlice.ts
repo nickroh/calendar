@@ -17,7 +17,7 @@ const eventsSlice = createSlice({
       state.events.sort((a, b) => {
         const dateA = new Date(a.date).getTime()
         const dateB = new Date(b.date).getTime()
-        if (dateA !== dateB) return dateB - dateA
+        if (dateA !== dateB) return dateA - dateB
         return a.timeRange - b.timeRange
       })
     },

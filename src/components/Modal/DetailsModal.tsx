@@ -27,12 +27,12 @@ const DetailsModal = ({ isOpen, onOpenChange }: DetailsModalProps) => {
 
 	const theme = darkmode ? "#DEDEDE" : "#c1c5ca"
 	const fontColor = darkmode ? "#121212" : "#FFFFFF"
-	if (!selectedEvent?.date) {
-		console.error("selectedEvent.date is null");
-		return;
-	}
-	const start = parseISO(selectedEvent.date);
-	const end = new Date(start.getTime() + selectedEvent.timeRange * 60000);
+	// if (!selectedEvent?.date) {
+	// 	console.error("selectedEvent.date is null");
+	// 	return;
+	// }
+	// const start = parseISO(selectedEvent.date);
+	// const end = new Date(start.getTime() + selectedEvent.timeRange * 60000);
 	const handleRemove = () => {
 		dispatch(removeEvent(selectedEvent.id))
 	}
@@ -48,7 +48,7 @@ const DetailsModal = ({ isOpen, onOpenChange }: DetailsModalProps) => {
 						</ModalHeader>
 						<ModalBody style={{ backgroundColor: theme }} className="flex flex-col gap-1 text-black">
 							<p>
-								{start.toTimeString().slice(0, 5) + "-" + end.toTimeString().slice(0, 5)}
+								{parseISO(selectedEvent.date).toTimeString().slice(0, 5) + "-" + new Date(parseISO(selectedEvent.date).getTime() + selectedEvent.timeRange * 60000).toTimeString().slice(0, 5)}
 							</p>
 							<p>
 								{selectedEvent.description}

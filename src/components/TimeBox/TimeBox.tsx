@@ -14,10 +14,13 @@ const TimeBox = (props: TimeBoxProps) => {
 				top: props.coord.top,   // e.g., Thursday (4th row)
 				width: props.coord.width,  // 2 hours
 				height: props.coord.height, // one day row
-				backgroundColor: props.color
+				backgroundColor: props.color,
+				color: "#FEFEFE"
 			}}
 			// onClick={}
-		/>
+		>
+			{props.title}
+		</div>
 	)
 }
 

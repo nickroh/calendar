@@ -97,13 +97,13 @@ const MonthView = () => {
 			</div>
 			<div className="my-0 border-t border-gray-600" />
 			<div
-				className="grid grid-rows-24 gap-0"
-				style={{ width: '100%' }}
+				className="grid grid-rows-5 gap-0"
+				style={{ width: '100%', height: '90%' }}
 			>
 				{[...Array(5)].map((hour, i) => (
 					<div
 						key={i}
-						className="grid grid-cols-[1fr_1fr_1fr_1fr_1fr_1fr_1fr] h-28"
+						className="grid grid-cols-[1fr_1fr_1fr_1fr_1fr_1fr_1fr]"
 					>
 						{Array.from({ length: 7 }).map((_, j) => (
 							<div key={j}

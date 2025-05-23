@@ -4,6 +4,7 @@ export interface TimeBoxProps {
     coord: Coord
     color: string
     id: UUIDTypes
+    title?: string
 }
 
 export interface Coord {
