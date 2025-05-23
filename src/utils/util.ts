@@ -63,14 +63,14 @@ export function getEventBox(dayIndex: number, startHour: number, startMinute: nu
     const columnSize = 1 / 7.3 * 100 * scale;
     const labelRatio = 3 / 73 * 100;       // ≈ 4.11%
     const columnRatio = 1 / 7.3 * 100;        // ≈ 13.70%
-    const rowHeight = 8.2;             // ≈ 4.16%
+    const rowHeight = 4;             // ≈ 4.16%
     const shift = small ? Math.random() * 0.4 * columnRatio : 0
 
     return {
         left: `${labelRatio + columnRatio * (dayIndex) + shift}%`,
-        top: `${rowHeight * startHour}%`,
+        top: `${rowHeight * startHour}rem`,
         width: `${columnSize}%`,
-        height: `${(rowHeight * durationMinutes) / 60}%`
+        height: `${(rowHeight * durationMinutes) / 60}rem`
     };
 }
 
